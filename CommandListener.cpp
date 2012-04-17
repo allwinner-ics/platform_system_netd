@@ -304,22 +304,6 @@ int CommandListener::InterfaceCmd::runCommand(SocketClient *cli,
 
             ifc_close();
             return 0;
-		/* Begin rename interface (add by shuge@allwinnertech.com) */
-		} else if (!strcmp(argv[1], "rename")) {
-			// arglist: iface olname newname
-			if (argc <3 ){
-				cli->sendMsg(ResponseCode::CommandSyntaxError, "Missing argument", false);
-				return 0;
-			}
-
-			ifc_init();
-			if (ifc_set_name(argv[2], argv[3])) {
-				cli->sendMsg(ResponseCode::OperationFailed, "Failed to set address", true);
-			}
-            cli->sendMsg(ResponseCode::CommandOkay, "Interface rename set", false);
-			ifc_close();
-			return 0;
-		/* End rename interface (add by shuge@allwinnertech.com) */
         } else if (!strcmp(argv[1], "setcfg")) {
             // arglist: iface addr prefixLength [flags]
             if (argc < 5) {
